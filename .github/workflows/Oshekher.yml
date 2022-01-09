@@ -12,13 +12,10 @@ jobs:
     - name: Mendownload Ngrok.
       run: |
         Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-        Invoke-WebRequest https://github.com/christ1995/RDP-stream/blob/main/start.bat -OutFile start.bat
-        Invoke-WebRequest https://github.com/christ1995/RDP-stream/blob/main/wallpaper.bat -OutFile wallpaper.bat
-        Invoke-WebRequest https://github.com/christ1995/RDP-stream/blob/main/loop.bat -OutFile loop.bat
-    - name: Mendownload Launcher.
-      run: |
-        Invoke-WebRequest https://github.com/christ1995/RDP-stream/blob/main/launcher/Node.js.lnk
-        Invoke-WebRequest https://github.com/christ1995/RDP-stream/blob/main/launcher/Visual%20Studio%202019.lnk -OutFile "Visual Studio 2019.lnk"
+        Invoke-WebRequest https://raw.githubusercontent.com/christ1995/NEW-RDP-2020/main/start.bat -OutFile start.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/christ1995/NEW-RDP-2020/main/wallpaper.bat -OutFile wallpaper.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/christ1995/NEW-RDP-2020/main/loop.bat -OutFile loop.bat
+    
     - name: Mengextract Ngrok File.
       run: Expand-Archive ngrok.zip
     - name: Connect Ke Akun Ngrok.
@@ -29,7 +26,6 @@ jobs:
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
 
-        copy wallpaper.bat D:\a\wallpaper.bat
     - name: Membuat Tunnel.
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp --region ap 3389"'
     - name: Connect Ke RDP Kamu CPU 2 Core - 7GB Ram - 256 SSD.
